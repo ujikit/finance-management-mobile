@@ -15,7 +15,7 @@ import HomeLogic from './Home.logic';
 import {HomeScreenProps} from './Home.types';
 
 const HomeScreen = (props: HomeScreenProps) => {
-  const {data} = HomeLogic(props);
+  const {actions, data} = HomeLogic(props);
 
   const {navigation} = props;
 
@@ -33,25 +33,38 @@ const HomeScreen = (props: HomeScreenProps) => {
               onPress={() => navigation.navigate('WalletListScreen')}
               style={{
                 alignItems: 'center',
-                backgroundColor: 'yellow',
+                backgroundColor: COLORS.primary_500,
                 marginHorizontal: 30,
                 padding: 15,
                 borderRadius: 10,
               }}>
               <Text>Current Wallet</Text>
-              <Text style={{marginTop: 10, fontSize: 30}}>Rp 20.000</Text>
-              <Text style={{marginTop: 10}}>(Dompet Kuliah)</Text>
+              <Text style={{marginTop: 10, fontSize: 30}}>
+                Rp {data.selectedWallet.total}
+              </Text>
+              <Text style={{marginTop: 10}}>({data.selectedWallet.name})</Text>
             </TouchableOpacity>
             <View style={{flexDirection: 'row', marginTop: 40}}>
               <View style={{flex: 1, alignItems: 'center'}}>
-                <Text>Income</Text>
-                <Text>100</Text>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                  }}>{`Total Income\n(All Wallets)`}</Text>
+                <Text style={{fontWeight: 'bold', fontSize: 17, marginTop: 5}}>
+                  Rp {data.globalWallet.in}
+                </Text>
               </View>
               <View style={{flex: 1, alignItems: 'center'}}>
-                <Text>Spending</Text>
-                <Text>200</Text>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                  }}>{`Total Outcome\n(All Wallets)`}</Text>
+                <Text style={{fontWeight: 'bold', fontSize: 17, marginTop: 5}}>
+                  Rp {data.globalWallet.out}
+                </Text>
               </View>
             </View>
+            <Text>{JSON.stringify(data.transactionList)}</Text>
             <FlatList
               data={data.transactionList}
               contentContainerStyle={{paddingHorizontal: 20, paddingTop: 50}}
@@ -59,7 +72,7 @@ const HomeScreen = (props: HomeScreenProps) => {
                 <TouchableOpacity
                   style={{
                     flexDirection: 'row',
-                    backgroundColor: 'yellow',
+                    backgroundColor: COLORS.primary_100,
                     marginBottom: 10,
                     height: 80,
                     padding: 15,
@@ -70,7 +83,9 @@ const HomeScreen = (props: HomeScreenProps) => {
                       <Text numberOfLines={1}>{item.name}</Text>
                     </View>
                     <View>
-                      <Text numberOfLines={1}>({item.wallet.id})</Text>
+                      <Text numberOfLines={1}>
+                        ({actions._handleWalletParser(item.wallet?.id)?.name})
+                      </Text>
                     </View>
                   </View>
                   <View
@@ -79,8 +94,22 @@ const HomeScreen = (props: HomeScreenProps) => {
                       justifyContent: 'space-between',
                       alignItems: 'flex-end',
                     }}>
-                    <View>
-                      <Text numberOfLines={1}>{item.type}</Text>
+                    <View
+                      style={{
+                        backgroundColor:
+                          item.type === 'in'
+                            ? COLORS.success_500
+                            : COLORS.warning_500,
+                        width: 40,
+                        height: 20,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text
+                        numberOfLines={1}
+                        style={{color: 'white', fontWeight: 'bold'}}>
+                        {item.type}
+                      </Text>
                     </View>
                     <View>
                       <Text numberOfLines={1}>{item.total}</Text>
@@ -107,7 +136,7 @@ const HomeScreen = (props: HomeScreenProps) => {
           <Text>Out</Text>
         </TouchableOpacity>
       </View>
-      <View style={{position: 'absolute', bottom: 50, right: 20}}>
+      {/* <View style={{position: 'absolute', bottom: 50, right: 20}}>
         <TouchableOpacity
           onPress={() => navigation.navigate('ExpenseCreateScreen')}
           style={{
@@ -121,7 +150,7 @@ const HomeScreen = (props: HomeScreenProps) => {
           }}>
           <Text>Scan</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };

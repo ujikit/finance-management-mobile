@@ -24,6 +24,12 @@ const colors = {
   primary_800: '#BB7000',
   primary_900: '#A06100',
 
+  grays_500: '#667085',
+  danger_500: '#F04438',
+  warning_500: '#F79009',
+  information_500: '#2E90FA',
+  success_500: '#12B76A',
+
   transparent: 'transparent',
 };
 

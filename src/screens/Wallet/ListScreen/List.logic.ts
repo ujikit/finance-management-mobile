@@ -1,28 +1,17 @@
-import { useState } from 'react';
-import { ListScreenProps } from './List.types';
+import {shallowEqual} from 'react-redux';
+
+import {useAppSelector} from '../../../redux/hook';
+
+import {ListScreenProps} from './List.types';
 
 const ListLogic = (props: ListScreenProps) => {
-  const [walletList, setWalletList] = useState([
-    {
-      name: 'Dompet Kuliah',
-      total: 1000,
-      isChecked: false,
-    },
-    {
-      name: 'Dompet Futsal',
-      total: 2000,
-      isChecked: true,
-    },
-    {
-      name: 'Dompet Main',
-      total: 3000,
-      isChecked: false,
-    },
-  ]);
+  const global = useAppSelector(state => state.global, shallowEqual);
+
+  const {walletList} = global;
 
   return {
-    actions: { setWalletList },
-    data: { walletList },
+    actions: {},
+    data: {walletList},
   };
 };
 

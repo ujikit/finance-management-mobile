@@ -6,10 +6,14 @@ export interface IGlobalState {
   loader: {
     isVisible: boolean;
   };
+  transactionList: any[];
+  walletList: any[];
 }
 
 const initialState: IGlobalState = {
   loader: {isVisible: false},
+  transactionList: [],
+  walletList: [],
 };
 
 const globalReducer: Reducer<IGlobalState, IActionGlobal> = (
@@ -19,6 +23,18 @@ const globalReducer: Reducer<IGlobalState, IActionGlobal> = (
   switch (action.type) {
     case 'LOADER':
       return {...state, isVisible: action.payload};
+    case 'CREATE_TRANSACTION':
+      return {
+        ...state,
+        transactionList: action.payload,
+      };
+    case 'UPDATE_TRANSACTION_LIST':
+      return {
+        ...state,
+        transactionList: action.payload,
+      };
+    case 'UPDATE_WALLET_LIST':
+      return {...state, walletList: action.payload};
     default:
       return state;
   }

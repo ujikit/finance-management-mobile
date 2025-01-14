@@ -15,8 +15,6 @@ const Loader = () => {
     shallowEqual,
   );
 
-  console.log('globalStateglobalState', globalState);
-
   const {loader} = globalState;
 
   return (

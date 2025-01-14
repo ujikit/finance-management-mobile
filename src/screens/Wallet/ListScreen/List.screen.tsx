@@ -34,23 +34,23 @@ const ListScreen = (props: ListScreenProps) => {
               contentContainerStyle={{paddingHorizontal: 20, paddingTop: 50}}
               renderItem={({item}) => (
                 <TouchableOpacity
-                  disabled={item.isChecked ? true : false}
+                  disabled={item.isSelected ? true : false}
                   style={{
                     flexDirection: 'row',
-                    backgroundColor: 'yellow',
+                    backgroundColor: COLORS.primary_100,
                     marginBottom: 10,
                     height: 80,
                     padding: 15,
                     borderRadius: 10,
                     alignItems: 'center',
-                    borderWidth: item.isChecked ? 1 : 0,
+                    borderWidth: item.isSelected ? 1 : 0,
                   }}>
                   <View
                     style={{
                       flex: 1,
                       flexDirection: 'row',
                     }}>
-                    {item.isChecked ? <Text>✅</Text> : null}
+                    {item.isSelected ? <Text>✅</Text> : null}
                     <View style={{paddingLeft: 10}}>
                       <Text numberOfLines={1}>{item.name}</Text>
                     </View>

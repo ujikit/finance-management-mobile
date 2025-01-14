@@ -1,8 +1,20 @@
-import { useState } from 'react';
+import {useMemo, useState} from 'react';
+import {shallowEqual, useDispatch} from 'react-redux';
 
-import { CreateScreenProps } from './Create.types';
+import {useAppSelector} from '../../../redux/hook';
+
+import {CreateScreenProps} from './Create.types';
+import {createTransactionDispatch} from '../../../redux/actions';
 
 const CreateLogic = (props: CreateScreenProps) => {
+  const {navigation} = props;
+
+  const global = useAppSelector(state => state.global, shallowEqual);
+
+  const {transactionList, walletList} = global;
+
+  const dispatch = useDispatch();
+
   const initForm = {
     WalletCreate: {
       form: {
@@ -20,7 +32,7 @@ const CreateLogic = (props: CreateScreenProps) => {
       button: {
         login: {
           title: 'Save',
-          actions: (form) => alert('tes'),
+          actions: form => _handleAddTransaction(form),
         },
       },
     },
@@ -29,7 +41,7 @@ const CreateLogic = (props: CreateScreenProps) => {
   const [form, setForm] = useState(initForm);
 
   const _handleInput = (type, value) => {
-    setForm((_prevState) => {
+    setForm(_prevState => {
       return {
         ..._prevState,
         WalletCreate: {
@@ -46,9 +58,31 @@ const CreateLogic = (props: CreateScreenProps) => {
     });
   };
 
+  const selectedWallet = useMemo(() => {
+    return walletList.filter(item => item.isSelected)[0];
+  }, [walletList]);
+
+  const _handleAddTransaction = _form => {
+    const data = {
+      name: _form.WalletCreate.form.name.value,
+      total: parseInt(_form.WalletCreate.form.balance.value, 10),
+      type: 'out',
+      wallet: {
+        id: selectedWallet.id,
+      },
+    };
+
+    const params = {
+      data,
+      transactionList,
+      navigation,
+    };
+    dispatch(createTransactionDispatch(params) as any);
+  };
+
   return {
-    actions: { setForm, _handleInput },
-    data: { form },
+    actions: {setForm, _handleInput},
+    data: {form, selectedWallet},
   };
 };
 

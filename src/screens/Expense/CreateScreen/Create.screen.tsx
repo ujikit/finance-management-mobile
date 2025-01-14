@@ -35,7 +35,7 @@ const CreateScreen = (props: CreateScreenProps) => {
           <View style={{marginHorizontal: 30}}>
             <View style={{marginBottom: 40, alignItems: 'center'}}>
               <Text>Wallet Name:</Text>
-              <Text>Wallet Name</Text>
+              <Text>({data.selectedWallet.name})</Text>
             </View>
             {Object.entries(form).map((item, index) => {
               const {title, value, placeholder} = item[1];
@@ -66,6 +66,7 @@ const CreateScreen = (props: CreateScreenProps) => {
               return (
                 <TouchableOpacity
                   key={index}
+                  onPress={() => item[1].actions(data.form)}
                   style={{
                     flex: 1,
                     backgroundColor: 'red',
