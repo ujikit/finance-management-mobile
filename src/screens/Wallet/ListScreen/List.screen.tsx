@@ -15,7 +15,7 @@ import ListLogic from './List.logic';
 import {ListScreenProps} from './List.types';
 
 const ListScreen = (props: ListScreenProps) => {
-  const {data} = ListLogic(props);
+  const {actions, data} = ListLogic(props);
 
   const {navigation} = props;
 
@@ -35,6 +35,7 @@ const ListScreen = (props: ListScreenProps) => {
               renderItem={({item}) => (
                 <TouchableOpacity
                   disabled={item.isSelected ? true : false}
+                  onPress={() => actions._handleSelectWallet(item.id)}
                   style={{
                     flexDirection: 'row',
                     backgroundColor: COLORS.primary_100,

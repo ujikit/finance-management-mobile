@@ -16,7 +16,7 @@ const CreateLogic = (props: CreateScreenProps) => {
   const dispatch = useDispatch();
 
   const initForm = {
-    WalletCreate: {
+    Transactionreate: {
       form: {
         name: {
           title: 'Spending Name',
@@ -44,12 +44,12 @@ const CreateLogic = (props: CreateScreenProps) => {
     setForm(_prevState => {
       return {
         ..._prevState,
-        WalletCreate: {
-          ..._prevState.WalletCreate,
+        Transactionreate: {
+          ..._prevState.Transactionreate,
           form: {
-            ..._prevState.WalletCreate.form,
+            ..._prevState.Transactionreate.form,
             [type]: {
-              ..._prevState.WalletCreate.form[type],
+              ..._prevState.Transactionreate.form[type],
               value,
             },
           },
@@ -64,8 +64,8 @@ const CreateLogic = (props: CreateScreenProps) => {
 
   const _handleAddTransaction = _form => {
     const data = {
-      name: _form.WalletCreate.form.name.value,
-      total: parseInt(_form.WalletCreate.form.balance.value, 10),
+      name: _form.Transactionreate.form.name.value,
+      total: parseInt(_form.Transactionreate.form.balance.value, 10),
       type: 'out',
       wallet: {
         id: selectedWallet.id,

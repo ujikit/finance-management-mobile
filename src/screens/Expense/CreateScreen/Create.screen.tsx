@@ -19,7 +19,7 @@ import {CreateScreenProps} from './Create.types';
 const CreateScreen = (props: CreateScreenProps) => {
   const {data, actions} = CreateLogic(props);
 
-  const {form, button} = data.form.WalletCreate;
+  const {form, button} = data.form.Transactionreate;
 
   const {navigation} = props;
 

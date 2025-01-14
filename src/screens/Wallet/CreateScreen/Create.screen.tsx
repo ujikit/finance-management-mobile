@@ -62,6 +62,7 @@ const CreateScreen = (props: CreateScreenProps) => {
               return (
                 <TouchableOpacity
                   key={index}
+                  onPress={() => item[1].actions(data.form)}
                   style={{
                     flex: 1,
                     backgroundColor: 'red',
