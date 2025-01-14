@@ -7,7 +7,6 @@ export const NavigationService = {
     _navigator = navigatorRef;
   },
   navigate: function navigate(screen, params) {
-    // set active property
     _navigator.dispatch(
       CommonActions.navigate({
         name: screen,

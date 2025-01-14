@@ -13,7 +13,7 @@ export const loaderDispatch = (data: any) => (dispatch: Dispatch<IGlobal>) => {
 export const createTransactionDispatch =
   params => async (dispatch: Dispatch<IGlobal>) => {
     const deductingBalanceOfCurrentWalletList = async () => {
-      const deductedBalance = params.selectedWallet.total - params.data.total;
+      const deductedBalance = params.selectedWallet?.total - params.data.total;
 
       if (deductedBalance < 0) {
         alert('Insufficient Balance.');
@@ -21,7 +21,7 @@ export const createTransactionDispatch =
       }
 
       const walletListUpdated = params.walletList.map(item => {
-        if (item.id === params.selectedWallet.id) {
+        if (item.id === params.selectedWallet?.id) {
           return {
             ...item,
             total: deductedBalance,
@@ -45,14 +45,16 @@ export const createTransactionDispatch =
     };
 
     const updatingTransactionList = async () => {
-      await STORAGE.AsyncStorage.Set(STORAGE_KEY.TRANSACTION_LIST, [
-        params.data,
-        ...params.transactionList,
-      ]);
+      const updatedTransactionList = [params.data, ...params.transactionList];
+
+      await STORAGE.AsyncStorage.Set(
+        STORAGE_KEY.TRANSACTION_LIST,
+        updatedTransactionList,
+      );
 
       dispatch({
         type: 'CREATE_TRANSACTION',
-        payload: [params.data, ...params.transactionList],
+        payload: updatedTransactionList,
       });
     };
 
@@ -75,7 +77,12 @@ export const updateTransactionListDispatch =
 export const createWalletListDispatch =
   (params: any) => async (dispatch: Dispatch<IGlobal>) => {
     try {
-      const walletListUpdated = [params.data, ...params.walletList];
+      let walletListUpdated = [];
+      if (!!params.walletList === true) {
+        walletListUpdated = [params.data, ...params.walletList];
+      } else {
+        walletListUpdated = [params.data];
+      }
 
       dispatch({
         type: 'UPDATE_WALLET_LIST',
@@ -89,7 +96,7 @@ export const createWalletListDispatch =
 
       params.navigation.goBack();
     } catch (error) {
-      alert(JSON.stringify(error));
+      alert(error.message);
       console.log('error_createWalletListDispatch', error);
     }
   };

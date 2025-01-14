@@ -40,9 +40,9 @@ const HomeScreen = (props: HomeScreenProps) => {
               }}>
               <Text>Current Wallet</Text>
               <Text style={{marginTop: 10, fontSize: 30}}>
-                Rp {data.selectedWallet.total}
+                Rp {data.selectedWallet?.total}
               </Text>
-              <Text style={{marginTop: 10}}>({data.selectedWallet.name})</Text>
+              <Text style={{marginTop: 10}}>({data.selectedWallet?.name})</Text>
             </TouchableOpacity>
             <View style={{flexDirection: 'row', marginTop: 40}}>
               <View style={{flex: 1, alignItems: 'center'}}>

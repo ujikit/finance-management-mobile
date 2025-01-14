@@ -22,7 +22,7 @@ const globalReducer: Reducer<IGlobalState, IActionGlobal> = (
 ) => {
   switch (action.type) {
     case 'LOADER':
-      return {...state, isVisible: action.payload};
+      return {...state, loader: {isVisible: action.payload}};
     case 'CREATE_TRANSACTION':
       return {
         ...state,

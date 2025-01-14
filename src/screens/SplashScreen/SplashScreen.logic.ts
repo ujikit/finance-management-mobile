@@ -26,8 +26,16 @@ const SplashScreenLogic = (props: SplashScreenProps) => {
 
     const walletList = await STORAGE.AsyncStorage.Get(STORAGE_KEY.WALLET_LIST);
 
-    dispatch(updateTransactionListDispatch(JSON.parse(transactionList)) as any);
-    dispatch(updateWalletListDispatch(JSON.parse(walletList)) as any);
+    dispatch(
+      updateTransactionListDispatch(
+        !!transactionList === true ? JSON.parse(transactionList) : [],
+      ) as any,
+    );
+    dispatch(
+      updateWalletListDispatch(
+        !!walletList === true ? JSON.parse(walletList) : [],
+      ) as any,
+    );
 
     navigation.reset({
       index: 0,
@@ -36,7 +44,6 @@ const SplashScreenLogic = (props: SplashScreenProps) => {
   }, [navigation]);
 
   const _handleInit = useCallback(() => {
-    // dispatch(getCurrentUserLocationDispatch());
     setTimeout(() => {
       _handleRedirectOnBoarding();
     }, 2000);

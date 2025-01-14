@@ -4,7 +4,10 @@ import {shallowEqual, useDispatch} from 'react-redux';
 import {useAppSelector} from '../../../redux/hook';
 
 import {CreateScreenProps} from './Create.types';
-import {createTransactionDispatch} from '../../../redux/actions';
+import {
+  createTransactionDispatch,
+  loaderDispatch,
+} from '../../../redux/actions';
 
 const CreateLogic = (props: CreateScreenProps) => {
   const {navigation} = props;
@@ -59,16 +62,30 @@ const CreateLogic = (props: CreateScreenProps) => {
   };
 
   const selectedWallet = useMemo(() => {
-    return walletList.filter(item => item.isSelected)[0];
+    return walletList?.filter(item => item.isSelected)[0];
   }, [walletList]);
 
   const _handleAddTransaction = _form => {
+    if (!!selectedWallet === false) {
+      dispatch(loaderDispatch(true) as any);
+      navigation.goBack();
+      setTimeout(() => {
+        navigation.navigate('WalletListScreen');
+        dispatch(loaderDispatch(false) as any);
+      }, 1000);
+      setTimeout(() => {
+        alert('Select Wallet first.');
+      }, 2000);
+
+      return;
+    }
+
     const data = {
       name: _form.Transactionreate.form.name.value,
       total: parseInt(_form.Transactionreate.form.balance.value, 10),
       type: 'out',
       wallet: {
-        id: selectedWallet.id,
+        id: selectedWallet?.id,
       },
     };
 

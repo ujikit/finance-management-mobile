@@ -9,7 +9,7 @@ const WalletParser = async walletId => {
     await STORAGE.AsyncStorage.Get(STORAGE_KEY.WALLET_LIST),
   );
 
-  return JSON.stringify(walletList.filter(item => item.id === walletId)[0]);
+  return JSON.stringify(walletList?.filter(item => item.id === walletId)[0]);
 };
 
 export {WalletParser};

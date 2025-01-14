@@ -13,7 +13,7 @@ const HomeLogic = (props: HomeScreenProps) => {
   const {transactionList, walletList} = global;
 
   const _handleCalculateCurrentExpense = (transactionType, walletId) => {
-    return transactionList.reduce((acc, item) => {
+    return transactionList?.reduce((acc, item) => {
       return item.type === transactionType && item.wallet.id === walletId
         ? acc + item.total
         : acc;
@@ -21,11 +21,11 @@ const HomeLogic = (props: HomeScreenProps) => {
   };
 
   const globalWallet = useMemo(() => {
-    const inData = transactionList.reduce((acc, item) => {
+    const inData = transactionList?.reduce((acc, item) => {
       return item.type === 'in' ? acc + item.total : acc;
     }, 0);
 
-    const outData = transactionList.reduce((acc, item) => {
+    const outData = transactionList?.reduce((acc, item) => {
       return item.type === 'out' ? acc + item.total : acc;
     }, 0);
 
@@ -36,11 +36,11 @@ const HomeLogic = (props: HomeScreenProps) => {
   }, [transactionList]);
 
   const selectedWallet = useMemo(() => {
-    return walletList.filter(item => item.isSelected)[0];
+    return walletList?.filter(item => item.isSelected)[0];
   }, [walletList]);
 
   const _handleWalletParser = walletId => {
-    return walletList.filter(item => item.id === walletId)[0];
+    return walletList?.filter(item => item.id === walletId)[0];
   };
 
   return {

@@ -37,10 +37,10 @@ const CreateScreen = (props: CreateScreenProps) => {
               <Text>Wallet Name:</Text>
               <View style={{marginTop: 10}}>
                 <Text style={{textAlign: 'center'}}>
-                  ({data.selectedWallet.name})
+                  ({data.selectedWallet?.name})
                 </Text>
                 <Text style={{textAlign: 'center'}}>
-                  Remain balance: {data.selectedWallet.total}
+                  Remain balance: {data.selectedWallet?.total}
                 </Text>
               </View>
             </View>

@@ -14,7 +14,7 @@ const ListLogic = (props: ListScreenProps) => {
   const {walletList} = global;
 
   const selectedWallet = useMemo(() => {
-    return walletList.filter(item => item.isSelected)[0];
+    return walletList?.filter(item => item.isSelected)[0];
   }, [walletList]);
 
   const _handleSelectWallet = walletId => {
