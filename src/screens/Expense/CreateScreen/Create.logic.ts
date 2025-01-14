@@ -74,8 +74,10 @@ const CreateLogic = (props: CreateScreenProps) => {
 
     const params = {
       data,
-      transactionList,
       navigation,
+      selectedWallet,
+      walletList,
+      transactionList,
     };
     dispatch(createTransactionDispatch(params) as any);
   };

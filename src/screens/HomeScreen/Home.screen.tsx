@@ -64,7 +64,6 @@ const HomeScreen = (props: HomeScreenProps) => {
                 </Text>
               </View>
             </View>
-            <Text>{JSON.stringify(data.transactionList)}</Text>
             <FlatList
               data={data.transactionList}
               contentContainerStyle={{paddingHorizontal: 20, paddingTop: 50}}
@@ -133,7 +132,7 @@ const HomeScreen = (props: HomeScreenProps) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text>Out</Text>
+          <Text>Create</Text>
         </TouchableOpacity>
       </View>
       {/* <View style={{position: 'absolute', bottom: 50, right: 20}}>

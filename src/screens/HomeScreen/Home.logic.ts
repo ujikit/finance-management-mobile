@@ -33,7 +33,7 @@ const HomeLogic = (props: HomeScreenProps) => {
       in: inData,
       out: outData,
     };
-  }, [walletList]);
+  }, [transactionList]);
 
   const selectedWallet = useMemo(() => {
     return walletList.filter(item => item.isSelected)[0];
