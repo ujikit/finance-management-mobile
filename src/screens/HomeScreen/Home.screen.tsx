@@ -57,7 +57,7 @@ const HomeScreen = (props: HomeScreenProps) => {
                 <Text
                   style={
                     STYLES.txtAlignCenter
-                  }>{`Total Outcome\n(All Wallets)`}</Text>
+                  }>{`Total Expense\n(All Wallets)`}</Text>
                 <Text style={styles.textInOut}>Rp {data.globalWallet.out}</Text>
               </View>
             </View>
