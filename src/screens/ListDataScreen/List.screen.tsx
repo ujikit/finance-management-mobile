@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 
-import {COLORS, STYLES} from '../../../configs';
+import {COLORS, STYLES} from '../../configs';
 
 import styles from './List.styles';
 import ListLogic from './List.logic';
@@ -17,8 +17,6 @@ import {ListScreenProps} from './List.types';
 
 const ListScreen = (props: ListScreenProps) => {
   const {actions, data} = ListLogic(props);
-
-  const {navigation} = props;
 
   return (
     <View style={STYLES.fx1}>
@@ -29,17 +27,19 @@ const ListScreen = (props: ListScreenProps) => {
           paddingBottom: Platform.select({ios: 200, android: 25}),
         }}>
         <SafeAreaView>
-          <View>
+          <View style={{}}>
             <FlatList
-              data={data.walletList}
+              data={data.transactionCategory}
               contentContainerStyle={styles.flatlistContent}
               renderItem={({item}) => (
                 <TouchableOpacity
                   disabled={item.isSelected ? true : false}
-                  onPress={() => actions._handleSelectWallet(item.id)}
+                  onPress={() =>
+                    actions._handleSelectTransactionCategory(item.id)
+                  }
                   style={[
-                    styles.wrapItem,
                     {borderWidth: item.isSelected ? 1 : 0},
+                    styles.wrapItem,
                   ]}>
                   <View style={[STYLES.fx1, STYLES.fxdRow]}>
                     {item.isSelected ? <Text>✅</Text> : null}
@@ -58,21 +58,6 @@ const ListScreen = (props: ListScreenProps) => {
           </View>
         </SafeAreaView>
       </ScrollView>
-      <View style={{position: 'absolute', bottom: 50, right: 30}}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('WalletCreateScreen')}
-          style={{
-            backgroundColor: COLORS.information_500,
-            marginVertical: 5,
-            borderRadius: 50,
-            width: 80,
-            height: 80,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text>Create</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };

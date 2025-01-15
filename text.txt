@@ -1,0 +1,44 @@
+const initData = [
+  {
+    name: 'Transferan dr mama',
+    total: 1000,
+    type: 'in',
+    wallet: {
+      id: 1,
+    },
+  },
+  {
+    name: 'Makan bakso',
+    total: 1000,
+    type: 'out',
+    wallet: {
+      id: 1,
+    },
+  },
+  {
+    name: 'Makan mie',
+    total: 1000,
+    type: 'out',
+    wallet: {
+      id: 2,
+    },
+  },
+];
+
+const asd = [
+  {
+    name: 'Dompet Kuliah',
+    total: 1000,
+    isChecked: false,
+  },
+  {
+    name: 'Dompet Futsal',
+    total: 2000,
+    isChecked: true,
+  },
+  {
+    name: 'Dompet Main',
+    total: 3000,
+    isChecked: false,
+  },
+];

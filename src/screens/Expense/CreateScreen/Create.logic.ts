@@ -14,12 +14,16 @@ const CreateLogic = (props: CreateScreenProps) => {
 
   const global = useAppSelector(state => state.global, shallowEqual);
 
-  const {transactionList, walletList} = global;
+  const {transactionList, walletList, transactionCategory} = global;
 
   const dispatch = useDispatch();
 
+  const selectedTransactionCategory = useMemo(() => {
+    return transactionCategory?.filter(item => item.isSelected)[0];
+  }, [transactionCategory]);
+
   const initForm = {
-    Transactionreate: {
+    TransactionCreate: {
       form: {
         name: {
           title: 'Spending Name',
@@ -30,6 +34,19 @@ const CreateLogic = (props: CreateScreenProps) => {
           title: 'Price',
           value: '',
           placeholder: 'Input price',
+        },
+        transactionCategory: {
+          title: 'Choose Transaction Category',
+          value: selectedTransactionCategory.name,
+          placeholder: 'Input description',
+          button: {
+            onPress: () => navigation.navigate('ListDataScreen'),
+          },
+        },
+        description: {
+          title: 'Description',
+          value: '',
+          placeholder: 'Input description',
         },
       },
       button: {
@@ -47,12 +64,12 @@ const CreateLogic = (props: CreateScreenProps) => {
     setForm(_prevState => {
       return {
         ..._prevState,
-        Transactionreate: {
-          ..._prevState.Transactionreate,
+        TransactionCreate: {
+          ..._prevState.TransactionCreate,
           form: {
-            ..._prevState.Transactionreate.form,
+            ..._prevState.TransactionCreate.form,
             [type]: {
-              ..._prevState.Transactionreate.form[type],
+              ..._prevState.TransactionCreate.form[type],
               value,
             },
           },
@@ -81,8 +98,10 @@ const CreateLogic = (props: CreateScreenProps) => {
     }
 
     const data = {
-      name: _form.Transactionreate.form.name.value,
-      total: parseInt(_form.Transactionreate.form.balance.value, 10),
+      name: _form.TransactionCreate.form.name.value,
+      total: parseInt(_form.TransactionCreate.form.balance.value, 10),
+      transactionCategory: selectedTransactionCategory.id,
+      description: _form.TransactionCreate.form.description.value,
       type: 'out',
       wallet: {
         id: selectedWallet?.id,
@@ -101,7 +120,7 @@ const CreateLogic = (props: CreateScreenProps) => {
 
   return {
     actions: {setForm, _handleInput},
-    data: {form, selectedWallet},
+    data: {form, selectedWallet, selectedTransactionCategory},
   };
 };
 

@@ -1,7 +1,5 @@
 import {shallowEqual} from 'react-redux';
 
-import {STORAGE} from '../../helpers';
-import {STORAGE_KEY} from '../../constants';
 import {useAppSelector} from '../../redux/hook';
 
 import {HomeScreenProps} from './Home.types';

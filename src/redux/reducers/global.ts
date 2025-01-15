@@ -8,12 +8,25 @@ export interface IGlobalState {
   };
   transactionList: any[];
   walletList: any[];
+  transactionCategory: any[];
 }
 
 const initialState: IGlobalState = {
   loader: {isVisible: false},
   transactionList: [],
   walletList: [],
+  transactionCategory: [
+    {
+      id: 1,
+      name: 'Food',
+      isSelected: false,
+    },
+    {
+      id: 2,
+      name: 'Transportation',
+      isSelected: true,
+    },
+  ],
 };
 
 const globalReducer: Reducer<IGlobalState, IActionGlobal> = (
@@ -35,6 +48,8 @@ const globalReducer: Reducer<IGlobalState, IActionGlobal> = (
       };
     case 'UPDATE_WALLET_LIST':
       return {...state, walletList: action.payload};
+    case 'CHOOSE_TRANSACTION_CATEGORY':
+      return {...state, transactionCategory: action.payload};
     default:
       return state;
   }

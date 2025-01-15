@@ -9,8 +9,9 @@ import {
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-import {COLORS} from '../../../src/configs';
+import {COLORS, STYLES} from '../../../src/configs';
 
+import styles from './Home.styles';
 import HomeLogic from './Home.logic';
 import {HomeScreenProps} from './Home.types';
 
@@ -20,7 +21,7 @@ const HomeScreen = (props: HomeScreenProps) => {
   const {navigation} = props;
 
   return (
-    <View style={{flex: 1}}>
+    <View style={STYLES.fx1}>
       <ScrollView
         bounces={false}
         style={{backgroundColor: COLORS.white_100}}
@@ -31,53 +32,39 @@ const HomeScreen = (props: HomeScreenProps) => {
           <View>
             <TouchableOpacity
               onPress={() => navigation.navigate('WalletListScreen')}
-              style={{
-                alignItems: 'center',
-                backgroundColor: COLORS.primary_500,
-                marginHorizontal: 30,
-                padding: 15,
-                borderRadius: 10,
-              }}>
+              style={styles.wrapCurrentWallet}>
               <Text>Current Wallet</Text>
-              <Text style={{marginTop: 10, fontSize: 30}}>
+              <Text style={styles.textSelectedWallet}>
                 Rp {data.selectedWallet?.total}
               </Text>
-              <Text style={{marginTop: 10}}>({data.selectedWallet?.name})</Text>
+              <Text style={styles.marginTop10}>
+                ({data.selectedWallet?.name})
+              </Text>
             </TouchableOpacity>
-            <View style={{flexDirection: 'row', marginTop: 40}}>
-              <View style={{flex: 1, alignItems: 'center'}}>
+            <View style={styles.wrapTotalInOut}>
+              <View style={[STYLES.fx1, STYLES.alItCenter]}>
                 <Text
                   style={{
                     textAlign: 'center',
                   }}>{`Total Income\n(All Wallets)`}</Text>
-                <Text style={{fontWeight: 'bold', fontSize: 17, marginTop: 5}}>
-                  Rp {data.globalWallet.in}
-                </Text>
+                <Text style={styles.textInOut}>Rp {data.globalWallet.in}</Text>
               </View>
-              <View style={{flex: 1, alignItems: 'center'}}>
+              <View style={[STYLES.fx1, STYLES.alItCenter]}>
                 <Text
                   style={{
                     textAlign: 'center',
                   }}>{`Total Outcome\n(All Wallets)`}</Text>
-                <Text style={{fontWeight: 'bold', fontSize: 17, marginTop: 5}}>
-                  Rp {data.globalWallet.out}
-                </Text>
+                <Text style={styles.textInOut}>Rp {data.globalWallet.out}</Text>
               </View>
             </View>
             <FlatList
               data={data.transactionList}
-              contentContainerStyle={{paddingHorizontal: 20, paddingTop: 50}}
+              contentContainerStyle={styles.flatlistStyle}
               renderItem={({item}) => (
                 <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    backgroundColor: COLORS.primary_100,
-                    marginBottom: 10,
-                    height: 80,
-                    padding: 15,
-                    borderRadius: 10,
-                  }}>
-                  <View style={{flex: 1, justifyContent: 'space-between'}}>
+                  disabled={true}
+                  style={styles.wrapItemFlatlist}>
+                  <View style={[STYLES.fx1, STYLES.jusContSpbtw]}>
                     <View>
                       <Text numberOfLines={1}>{item.name}</Text>
                     </View>
@@ -88,25 +75,20 @@ const HomeScreen = (props: HomeScreenProps) => {
                     </View>
                   </View>
                   <View
-                    style={{
-                      flex: 1,
-                      justifyContent: 'space-between',
-                      alignItems: 'flex-end',
-                    }}>
+                    style={[STYLES.fx1, STYLES.jusContSpbtw, STYLES.alItEnd]}>
                     <View
-                      style={{
-                        backgroundColor:
-                          item.type === 'in'
-                            ? COLORS.success_500
-                            : COLORS.warning_500,
-                        width: 40,
-                        height: 20,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
+                      style={[
+                        {
+                          backgroundColor:
+                            item.type === 'in'
+                              ? COLORS.success_500
+                              : COLORS.warning_500,
+                        },
+                        styles.wrapTransactionType,
+                      ]}>
                       <Text
                         numberOfLines={1}
-                        style={{color: 'white', fontWeight: 'bold'}}>
+                        style={styles.textTransactionType}>
                         {item.type}
                       </Text>
                     </View>
@@ -120,18 +102,10 @@ const HomeScreen = (props: HomeScreenProps) => {
           </View>
         </SafeAreaView>
       </ScrollView>
-      <View style={{position: 'absolute', bottom: 120, right: 20}}>
+      <View style={styles.wrapCreateButton}>
         <TouchableOpacity
           onPress={() => navigation.navigate('ExpenseCreateScreen')}
-          style={{
-            backgroundColor: 'red',
-            marginVertical: 5,
-            borderRadius: 50,
-            width: 60,
-            height: 60,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+          style={styles.wrapCreateButton2}>
           <Text>Create</Text>
         </TouchableOpacity>
       </View>
@@ -139,7 +113,7 @@ const HomeScreen = (props: HomeScreenProps) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('ExpenseCreateScreen')}
           style={{
-            backgroundColor: 'red',
+            backgroundColor: COLORS.information_500,
             marginVertical: 5,
             borderRadius: 50,
             width: 60,

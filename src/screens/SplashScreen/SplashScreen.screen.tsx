@@ -13,9 +13,7 @@ const SplashScreen = (props: SplashScreenProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}>
-        {`Finance\nManagement App`}
-      </Text>
+      <Text style={styles.textLogo}>{`Finance\nManagement App`}</Text>
     </View>
   );
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {
-  FlatCreate,
   Platform,
   ScrollView,
   Text,
@@ -10,7 +9,7 @@ import {
   View,
 } from 'react-native';
 
-import {COLORS} from '../../../configs';
+import {COLORS, STYLES} from '../../../configs';
 
 import styles from './Create.styles';
 import CreateLogic from './Create.logic';
@@ -19,12 +18,10 @@ import {CreateScreenProps} from './Create.types';
 const CreateScreen = (props: CreateScreenProps) => {
   const {data, actions} = CreateLogic(props);
 
-  const {form, button} = data.form.Transactionreate;
-
-  const {navigation} = props;
+  const {form, button} = data.form.TransactionCreate;
 
   return (
-    <View style={{flex: 1}}>
+    <View style={STYLES.fx1}>
       <ScrollView
         bounces={false}
         style={{backgroundColor: COLORS.white_100}}
@@ -32,39 +29,37 @@ const CreateScreen = (props: CreateScreenProps) => {
           paddingBottom: Platform.select({ios: 200, android: 25}),
         }}>
         <SafeAreaView>
-          <View style={{marginHorizontal: 30}}>
-            <View style={{marginBottom: 40, alignItems: 'center'}}>
+          <View style={styles.marginHorizontal30}>
+            <View style={styles.wrapContentWallet}>
               <Text>Wallet Name:</Text>
-              <View style={{marginTop: 10}}>
-                <Text style={{textAlign: 'center'}}>
+              <View style={styles.marginTop10}>
+                <Text style={STYLES.txtAlignCenter}>
                   ({data.selectedWallet?.name})
                 </Text>
-                <Text style={{textAlign: 'center'}}>
+                <Text style={STYLES.txtAlignCenter}>
                   Remain balance: {data.selectedWallet?.total}
                 </Text>
               </View>
             </View>
             {Object.entries(form).map((item, index) => {
-              const {title, value, placeholder} = item[1];
+              const {title, value, placeholder, button} = item[1];
 
               return (
-                <View
-                  key={index}
-                  style={{
-                    marginBottom: 20,
-                    borderWidth: 1,
-
-                    padding: 20,
-                    borderRadius: 10,
-                  }}>
+                <View key={index} style={styles.wrapFormItem}>
                   <Text style={styles.textLableStyles}>{title}</Text>
-                  <TextInput
-                    value={value}
-                    placeholder={placeholder}
-                    onChangeText={(_val: string) =>
-                      actions._handleInput(item[0], _val)
-                    }
-                  />
+                  {!!button ? (
+                    <TouchableOpacity onPress={button.onPress}>
+                      <Text>{data.selectedTransactionCategory?.name}</Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <TextInput
+                      value={value}
+                      placeholder={placeholder}
+                      onChangeText={(_val: string) =>
+                        actions._handleInput(item[0], _val)
+                      }
+                    />
+                  )}
                 </View>
               );
             })}
@@ -74,14 +69,8 @@ const CreateScreen = (props: CreateScreenProps) => {
                 <TouchableOpacity
                   key={index}
                   onPress={() => item[1].actions(data.form)}
-                  style={{
-                    flex: 1,
-                    backgroundColor: 'red',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderRadius: 10,
-                  }}>
-                  <Text style={{padding: 20}}>{item[1].title}</Text>
+                  style={styles.wrapButtonItem}>
+                  <Text style={styles.padding20}>{item[1].title}</Text>
                 </TouchableOpacity>
               );
             })}

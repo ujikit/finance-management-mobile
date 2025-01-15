@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import {COLORS} from '../../../configs';
+import {COLORS} from '../../configs';
 
 export default StyleSheet.create({
   flatlistContent: {paddingHorizontal: 20, paddingTop: 50},

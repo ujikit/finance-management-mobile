@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 
-import {COLORS} from '../../../configs';
+import {COLORS, STYLES} from '../../../configs';
 
 import styles from './Create.styles';
 import CreateLogic from './Create.logic';
@@ -21,10 +21,8 @@ const CreateScreen = (props: CreateScreenProps) => {
 
   const {form, button} = data.form.WalletCreate;
 
-  const {navigation} = props;
-
   return (
-    <View style={{flex: 1}}>
+    <View style={STYLES.fx1}>
       <ScrollView
         bounces={false}
         style={{backgroundColor: COLORS.white_100}}
@@ -32,20 +30,12 @@ const CreateScreen = (props: CreateScreenProps) => {
           paddingBottom: Platform.select({ios: 200, android: 25}),
         }}>
         <SafeAreaView>
-          <View style={{marginHorizontal: 30}}>
+          <View style={styles.marginHorizontal30}>
             {Object.entries(form).map((item, index) => {
               const {title, value, placeholder} = item[1];
 
               return (
-                <View
-                  key={index}
-                  style={{
-                    marginBottom: 20,
-                    borderWidth: 1,
-
-                    padding: 20,
-                    borderRadius: 10,
-                  }}>
+                <View key={index} style={styles.wrapFormItem}>
                   <Text style={styles.textLableStyles}>{title}</Text>
                   <TextInput
                     value={value}
@@ -63,13 +53,7 @@ const CreateScreen = (props: CreateScreenProps) => {
                 <TouchableOpacity
                   key={index}
                   onPress={() => item[1].actions(data.form)}
-                  style={{
-                    flex: 1,
-                    backgroundColor: 'red',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderRadius: 10,
-                  }}>
+                  style={styles.wrapButtonItem}>
                   <Text style={{padding: 20}}>{item[1].title}</Text>
                 </TouchableOpacity>
               );

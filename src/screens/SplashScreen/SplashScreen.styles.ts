@@ -1,8 +1,7 @@
 //package import
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 //local import
-import { COLORS } from '../../configs';
 
 const SplashScreenStyles = StyleSheet.create({
   container: {
@@ -14,11 +13,7 @@ const SplashScreenStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
-  textVersion: {
-    fontSize: 15,
-    color: COLORS.Tertiary_Gray_400,
-    paddingTop: 50,
-  },
+  textLogo: {fontSize: 20, fontWeight: 'bold', textAlign: 'center'},
 });
 
 export default SplashScreenStyles;

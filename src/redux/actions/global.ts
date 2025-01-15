@@ -124,3 +124,22 @@ export const selectWalletDispatch =
 
     dispatch({type: 'UPDATE_WALLET_LIST', payload: data});
   };
+
+export const selectTransactionCategoryDispatch =
+  (params: any) => (dispatch: Dispatch<IGlobal>) => {
+    const data = params.transactionCategory.map(item => {
+      if (item.id === params.transactionCategoryId) {
+        return {
+          ...item,
+          isSelected: true,
+        };
+      } else {
+        return {
+          ...item,
+          isSelected: false,
+        };
+      }
+    });
+
+    dispatch({type: 'CHOOSE_TRANSACTION_CATEGORY', payload: data});
+  };
