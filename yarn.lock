@@ -3239,7 +3239,6 @@ __metadata:
     prettier: 2.8.8
     react: 18.2.0
     react-native: 0.74.2
-    react-native-camera: ^4.2.1
     react-native-gesture-handler: ^2.17.0
     react-native-modal: ^13.0.1
     react-native-reanimated: 3.15.5
@@ -8529,15 +8528,6 @@ __metadata:
   dependencies:
     prop-types: ^15.7.2
   checksum: eb35821de36ae4eb00f97d99fc22ed79bd017248092ff1299f9d46a7ab946de16d2e6d6bfbf4cab5ef77d0d3bf47684aec761a7670ec7d36aae8d77ab8ddd171
-  languageName: node
-  linkType: hard
-
-"react-native-camera@npm:^4.2.1":
-  version: 4.2.1
-  resolution: "react-native-camera@npm:4.2.1"
-  dependencies:
-    prop-types: ^15.6.2
-  checksum: 0e84ce657774694d1cc49395c43a8f2caabc03df36aa77aacfb5c797ad8cfe0368f4807deccc54e82ff2b193e8c2d1ce7ad504eedf7a9fc4719b38e39958a804
   languageName: node
   linkType: hard
 
