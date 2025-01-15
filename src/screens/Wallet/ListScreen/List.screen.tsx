@@ -33,6 +33,13 @@ const ListScreen = (props: ListScreenProps) => {
             <FlatList
               data={data.walletList}
               contentContainerStyle={styles.flatlistContent}
+              ListEmptyComponent={
+                <View
+                  style={[STYLES.fx1, STYLES.jusContCntr, STYLES.alItCenter]}>
+                  <Text>Empty Wallet.</Text>
+                  <Text>Try to Create new one</Text>
+                </View>
+              }
               renderItem={({item}) => (
                 <TouchableOpacity
                   disabled={item.isSelected ? true : false}

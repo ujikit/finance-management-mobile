@@ -25,14 +25,14 @@ const CreateLogic = (props: CreateScreenProps) => {
         },
         balance: {
           title: 'Balance',
-          value: '',
+          value: 0,
           placeholder: 'Input balance',
         },
       },
       button: {
         login: {
           title: 'Save',
-          actions: form => _handleAddTransaction(form),
+          actions: form => _handleAddWallet(form),
         },
       },
     },
@@ -58,7 +58,7 @@ const CreateLogic = (props: CreateScreenProps) => {
     });
   };
 
-  const _handleAddTransaction = _form => {
+  const _handleAddWallet = _form => {
     const data = {
       id: new Date().getTime(),
       name: _form.WalletCreate.form.name.value,

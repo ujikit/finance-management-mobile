@@ -92,6 +92,13 @@ const HomeScreen = (props: HomeScreenProps) => {
             <FlatList
               data={data.filteredTransactionList}
               contentContainerStyle={styles.flatlistStyle}
+              ListEmptyComponent={
+                <View
+                  style={[STYLES.fx1, STYLES.jusContCntr, STYLES.alItCenter]}>
+                  <Text>Empty Transaction.</Text>
+                  <Text>Try to Create new one</Text>
+                </View>
+              }
               renderItem={({item}) => (
                 <TouchableOpacity
                   disabled={true}
