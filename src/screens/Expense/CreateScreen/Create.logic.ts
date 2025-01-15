@@ -98,6 +98,7 @@ const CreateLogic = (props: CreateScreenProps) => {
     }
 
     const data = {
+      id: new Date().getTime(),
       name: _form.TransactionCreate.form.name.value,
       total: parseInt(_form.TransactionCreate.form.balance.value, 10),
       transactionCategory: selectedTransactionCategory.id,

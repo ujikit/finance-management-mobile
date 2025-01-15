@@ -3,6 +3,7 @@ import {
   Platform,
   ScrollView,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -25,9 +26,12 @@ const HomeScreen = (props: HomeScreenProps) => {
       <ScrollView
         bounces={false}
         style={{backgroundColor: COLORS.white_100}}
-        contentContainerStyle={{
-          paddingBottom: Platform.select({ios: 200, android: 25}),
-        }}>
+        contentContainerStyle={[
+          styles.marginHorizontal30,
+          {
+            paddingBottom: Platform.select({ios: 200, android: 25}),
+          },
+        ]}>
         <SafeAreaView>
           <View>
             <TouchableOpacity
@@ -44,21 +48,49 @@ const HomeScreen = (props: HomeScreenProps) => {
             <View style={styles.wrapTotalInOut}>
               <View style={[STYLES.fx1, STYLES.alItCenter]}>
                 <Text
-                  style={{
-                    textAlign: 'center',
-                  }}>{`Total Income\n(All Wallets)`}</Text>
+                  style={
+                    STYLES.txtAlignCenter
+                  }>{`Total Income\n(All Wallets)`}</Text>
                 <Text style={styles.textInOut}>Rp {data.globalWallet.in}</Text>
               </View>
               <View style={[STYLES.fx1, STYLES.alItCenter]}>
                 <Text
-                  style={{
-                    textAlign: 'center',
-                  }}>{`Total Outcome\n(All Wallets)`}</Text>
+                  style={
+                    STYLES.txtAlignCenter
+                  }>{`Total Outcome\n(All Wallets)`}</Text>
                 <Text style={styles.textInOut}>Rp {data.globalWallet.out}</Text>
               </View>
             </View>
+            <View style={styles.wrapSearch}>
+              <View style={styles.wrapSearch2}>
+                {Object.entries(data.form).map((item, index) => {
+                  const {value} = item[1];
+
+                  return (
+                    <TextInput
+                      key={index}
+                      value={value}
+                      placeholder={'Search title or description'}
+                      onChangeText={(_val: string) =>
+                        actions._handleInput(_val)
+                      }
+                    />
+                  );
+                })}
+              </View>
+              {/* <TouchableOpacity
+                style={{
+                  flex: 1,
+                  width: '20%',
+                  backgroundColor: COLORS.success_500,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text>Find</Text>
+              </TouchableOpacity> */}
+            </View>
             <FlatList
-              data={data.transactionList}
+              data={data.filteredTransactionList}
               contentContainerStyle={styles.flatlistStyle}
               renderItem={({item}) => (
                 <TouchableOpacity

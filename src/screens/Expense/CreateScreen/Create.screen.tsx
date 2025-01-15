@@ -45,12 +45,14 @@ const CreateScreen = (props: CreateScreenProps) => {
               const {title, value, placeholder, button} = item[1];
 
               return (
-                <View key={index} style={styles.wrapFormItem}>
+                <TouchableOpacity
+                  disabled={!!!button}
+                  onPress={button?.onPress}
+                  key={index}
+                  style={styles.wrapFormItem}>
                   <Text style={styles.textLableStyles}>{title}</Text>
                   {!!button ? (
-                    <TouchableOpacity onPress={button.onPress}>
-                      <Text>{data.selectedTransactionCategory?.name}</Text>
-                    </TouchableOpacity>
+                    <Text>{data.selectedTransactionCategory?.name}</Text>
                   ) : (
                     <TextInput
                       value={value}
@@ -60,7 +62,7 @@ const CreateScreen = (props: CreateScreenProps) => {
                       }
                     />
                   )}
-                </View>
+                </TouchableOpacity>
               );
             })}
 

@@ -19,12 +19,17 @@ const initialState: IGlobalState = {
     {
       id: 1,
       name: 'Food',
-      isSelected: false,
+      isSelected: true,
     },
     {
       id: 2,
       name: 'Transportation',
-      isSelected: true,
+      isSelected: false,
+    },
+    {
+      id: 3,
+      name: 'Entertainment',
+      isSelected: false,
     },
   ],
 };
