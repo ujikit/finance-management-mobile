@@ -39,6 +39,8 @@ const CreateScreen = (props: CreateScreenProps) => {
                   <Text style={styles.textLableStyles}>{title}</Text>
                   <TextInput
                     value={value}
+                    placeholderTextColor={'gray'}
+                    style={{color: 'black'}}
                     placeholder={placeholder}
                     onChangeText={(_val: string) =>
                       actions._handleInput(item[0], _val)

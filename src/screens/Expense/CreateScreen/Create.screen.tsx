@@ -57,6 +57,8 @@ const CreateScreen = (props: CreateScreenProps) => {
                     <TextInput
                       value={value}
                       placeholder={placeholder}
+                      placeholderTextColor={'gray'}
+                      style={{color: 'black'}}
                       onChangeText={(_val: string) =>
                         actions._handleInput(item[0], _val)
                       }

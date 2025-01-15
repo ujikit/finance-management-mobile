@@ -70,6 +70,8 @@ const HomeScreen = (props: HomeScreenProps) => {
                     <TextInput
                       key={index}
                       value={value}
+                      placeholderTextColor={'gray'}
+                      style={{color: 'black'}}
                       placeholder={'Search title or description'}
                       onChangeText={(_val: string) =>
                         actions._handleInput(_val)
